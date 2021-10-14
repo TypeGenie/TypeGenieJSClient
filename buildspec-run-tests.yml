@@ -11,7 +11,8 @@ env:
 phases:
   install:
     commands:
-      - echo No installs required
+      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&
+      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
   pre_build:
     commands:
       - IMAGE_REPO_NAME=typegenie-api-client
@@ -30,9 +31,8 @@ phases:
       - DATE=$(date '+%Y-%m-%d-%H-%M')
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t tester-container:latest -f Tests.Dockerfile .
+#      - docker build -t tester-container:latest -f Tests.Dockerfile .
       - echo Running tests from test container
-
   post_build:
     commands:
       - echo codebuild succeeding is $CODEBUILD_BUILD_SUCCEEDING

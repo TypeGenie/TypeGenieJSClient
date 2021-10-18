@@ -16,7 +16,7 @@ phases:
     commands:
       - IMAGE_REPO_NAME=typegenie-api-client
       - REPO_NAME=TypeGenieJSClient
-      - REPO_URL=github.com/abhitopia/$REPO_NAME.git
+      - REPO_URL=github.com/TypeGenie/$REPO_NAME.git
       - ENV=staging
       - aws --version
       - ECR_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
